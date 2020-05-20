@@ -1,5 +1,6 @@
-package com.jasom.autopush.auth.service;
+package com.jason.autopush.auth.service;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.oauth2.common.ExpiringOAuth2RefreshToken;
@@ -11,6 +12,7 @@ import org.springframework.security.oauth2.provider.token.DefaultAuthenticationK
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.JdkSerializationStrategy;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStoreSerializationStrategy;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
@@ -19,6 +21,7 @@ import java.util.*;
  * @Author jason
  * @CreateTime 2020/5/19 11:53 下午
  **/
+@Component
 public class RedisTokenStore implements TokenStore {
     private static final String ACCESS = "access:";
     private static final String AUTH_TO_ACCESS = "auth_to_access:";

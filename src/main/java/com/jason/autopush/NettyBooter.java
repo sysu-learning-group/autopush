@@ -1,4 +1,4 @@
-package com.jasom.autopush;
+package com.jason.autopush;
 
 /**
  * @Desc
@@ -6,7 +6,7 @@ package com.jasom.autopush;
  * @CreateTime 2020/5/18 10:43 下午
  **/
 
-import com.jasom.autopush.websocket.WebSocketServer;
+import com.jason.autopush.websocket.WebSocketServer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;

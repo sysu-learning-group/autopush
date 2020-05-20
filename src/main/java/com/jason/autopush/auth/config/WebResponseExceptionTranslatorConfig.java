@@ -1,4 +1,4 @@
-package com.jasom.autopush.auth.config;
+package com.jason.autopush.auth.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

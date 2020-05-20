@@ -1,4 +1,4 @@
-package com.jasom.autopush;
+package com.jason.autopush;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
