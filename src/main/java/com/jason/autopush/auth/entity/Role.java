@@ -1,5 +1,8 @@
 package com.jason.autopush.auth.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+
+@TableName("roles")
 public class Role {
     private Integer id;
 

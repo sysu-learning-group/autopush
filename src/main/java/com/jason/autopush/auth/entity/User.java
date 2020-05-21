@@ -1,6 +1,17 @@
 package com.jason.autopush.auth.entity;
 
-public class User {
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+@TableName("users")
+public class User implements UserDetails {
     private Integer id;
 
     private String name;
@@ -19,7 +30,7 @@ public class User {
 
     private String remark;
 
-    private String authorities;
+    private String authority;
 
     public Integer getId() {
         return id;
@@ -73,8 +84,41 @@ public class User {
         return username;
     }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
     public void setUsername(String username) {
         this.username = username == null ? null : username.trim();
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> auths = new ArrayList<>();
+        String authority = getAuthority();
+        String[] userRoles = authority.split(",");
+
+        for (String userRole : userRoles) {
+            SimpleGrantedAuthority role = new SimpleGrantedAuthority("ROLE_" + userRole);
+            auths.add(role);
+        }
+        return auths;
     }
 
     public String getPassword() {
@@ -93,11 +137,11 @@ public class User {
         this.remark = remark == null ? null : remark.trim();
     }
 
-    public String getAuthorities() {
-        return authorities;
+    public String getAuthority() {
+        return authority;
     }
 
-    public void setAuthorities(String authorities) {
-        this.authorities = authorities == null ? null : authorities.trim();
+    public void setAuthority(String authority) {
+        this.authority = authority;
     }
 }

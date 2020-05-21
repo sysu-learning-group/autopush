@@ -1,8 +1,8 @@
 package com.jason.autopush.auth.service.Impl;
 
 import com.jason.autopush.auth.Exception.AuthErrorCode;
+import com.jason.autopush.auth.dao.mapper.RoleMapper;
 import com.jason.autopush.auth.dao.mapper.UserMapper;
-import com.jason.autopush.auth.entity.RoleMapper;
 import com.jason.autopush.auth.entity.Role;
 import com.jason.autopush.auth.entity.User;
 import com.jason.autopush.auth.service.CustomUserDetailService;
@@ -42,15 +42,10 @@ public class CustomUserDetailServiceImpl implements CustomUserDetailService {
 
         Role role = rolesMapper.selectByUserId(user.getId());
         if (role != null && StringUtils.isNotBlank(role.getRole())) {
-            String[] userRoles = role.getRole().split(",");
-
-            List<GrantedAuthority> authorities = new ArrayList<>();
-            for (String userRole : userRoles) {
-                SimpleGrantedAuthority r = new SimpleGrantedAuthority("ROLE_" + userRole);
-                authorities.add(r);
-            }
-
+            user.setAuthority(role.getRole());
         }
+
+        return user;
     }
 
 
@@ -74,12 +69,16 @@ public class CustomUserDetailServiceImpl implements CustomUserDetailService {
 
     @Override
     public void lock(User user, String lock) {
-
+        User existing = usersMapper.selectByPrimaryKey(user.getId());
+        existing.setEnabled(false);
+        usersMapper.updateByPrimaryKey(existing);
     }
 
     @Override
     public void unlock(User user, String unlock) {
-
+        User existing = usersMapper.selectByPrimaryKey(user.getId());
+        existing.setEnabled(true);
+        usersMapper.updateByPrimaryKey(existing);
     }
 
     @Override
