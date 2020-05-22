@@ -30,59 +30,22 @@ public class User implements UserDetails {
 
     private String remark;
 
+    /**
+     * 用户等级
+     */
+    private Byte userLevel;
+
+    /**
+     * 用户类型
+     */
+    private Byte userType;
+
+    /**
+     * 是否删除 0删除 1正常
+     */
+    private Boolean isDelete;
+
     private String authority;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone == null ? null : telephone.trim();
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
-    }
-
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public String getUsername() {
-        return username;
-    }
 
     @Override
     public boolean isAccountNonExpired() {
@@ -111,7 +74,7 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> auths = new ArrayList<>();
-        String authority = getAuthority();
+        String authority = this.authority;
         String[] userRoles = authority.split(",");
 
         for (String userRole : userRoles) {
@@ -121,27 +84,13 @@ public class User implements UserDetails {
         return auths;
     }
 
+    @Override
     public String getPassword() {
-        return password;
+        return null;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
-    }
-
-    public String getAuthority() {
-        return authority;
-    }
-
-    public void setAuthority(String authority) {
-        this.authority = authority;
+    @Override
+    public String getUsername() {
+        return null;
     }
 }
