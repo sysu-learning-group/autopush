@@ -3,68 +3,51 @@
 <mapper namespace="com.jason.autopush.auth.dao.mapper.UserMapper">
   <resultMap id="BaseResultMap" type="com.jason.autopush.auth.entity.User">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="phone" jdbcType="CHAR" property="phone" />
-    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
-    <result column="address" jdbcType="VARCHAR" property="address" />
-    <result column="enabled" jdbcType="BIT" property="enabled" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="authority" jdbcType="VARCHAR" property="authority" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="user_level" jdbcType="TINYINT" property="userLevel" />
+    <result column="user_type" jdbcType="TINYINT" property="userType" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="wechat" jdbcType="VARCHAR" property="wechat" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modified_time" jdbcType="TIMESTAMP" property="modifiedTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, name, phone, telephone, address, enabled, username, password, remark, authority
+    id, username, password, authority, avatar, user_level, user_type, is_delete, email, 
+    qq, tel, wechat, create_time, modified_time
   </sql>
-   <select id="isUsernameExist" parameterType="java.lang.String" resultMap="int">
-      select count(*) from users where username = #{username,jdbcType=VARCHAR}<br>
-    </select>
-    <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
-      select
-         <include refid="Base_Column_List" />
-         from users
-         where username = #{username,jdbcType=VARCHAR}
-    </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from users
+    from ums_user
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from users
+    delete from ums_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.jason.autopush.auth.entity.User">
-    insert into users (id, name, phone, 
-      telephone, address, enabled, 
-      username, password, remark, 
-      authority)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=CHAR}, 
-      #{telephone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{enabled,jdbcType=BIT}, 
-      #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{authority,jdbcType=VARCHAR})
+    insert into ums_user (id, username, password, 
+      authority, avatar, user_level, 
+      user_type, is_delete, email, 
+      qq, tel, wechat, create_time, 
+      modified_time)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{authority,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{userLevel,jdbcType=TINYINT}, 
+      #{userType,jdbcType=TINYINT}, #{isDelete,jdbcType=TINYINT}, #{email,jdbcType=VARCHAR}, 
+      #{qq,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifiedTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.jason.autopush.auth.entity.User">
-    insert into users
+    insert into ums_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="phone != null">
-        phone,
-      </if>
-      <if test="telephone != null">
-        telephone,
-      </if>
-      <if test="address != null">
-        address,
-      </if>
-      <if test="enabled != null">
-        enabled,
       </if>
       <if test="username != null">
         username,
@@ -72,31 +55,43 @@
       <if test="password != null">
         password,
       </if>
-      <if test="remark != null">
-        remark,
-      </if>
       <if test="authority != null">
         authority,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="userLevel != null">
+        user_level,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="wechat != null">
+        wechat,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifiedTime != null">
+        modified_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        #{phone,jdbcType=CHAR},
-      </if>
-      <if test="telephone != null">
-        #{telephone,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null">
-        #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="enabled != null">
-        #{enabled,jdbcType=BIT},
       </if>
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
@@ -104,94 +99,285 @@
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
       <if test="authority != null">
         #{authority,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevel != null">
+        #{userLevel,jdbcType=TINYINT},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=TINYINT},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null">
+        #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedTime != null">
+        #{modifiedTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.jason.autopush.auth.entity.User">
-    update users
+    update ums_user
     <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="phone != null">
-        phone = #{phone,jdbcType=CHAR},
-      </if>
-      <if test="telephone != null">
-        telephone = #{telephone,jdbcType=VARCHAR},
-      </if>
-      <if test="address != null">
-        address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="enabled != null">
-        enabled = #{enabled,jdbcType=BIT},
-      </if>
       <if test="username != null">
         username = #{username,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
       <if test="authority != null">
         authority = #{authority,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevel != null">
+        user_level = #{userLevel,jdbcType=TINYINT},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=TINYINT},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null">
+        wechat = #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedTime != null">
+        modified_time = #{modifiedTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.jason.autopush.auth.entity.User">
-    update users
-    set name = #{name,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=CHAR},
-      telephone = #{telephone,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      enabled = #{enabled,jdbcType=BIT},
-      username = #{username,jdbcType=VARCHAR},
+    update ums_user
+    set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
-      remark = #{remark,jdbcType=VARCHAR},
-      authority = #{authority,jdbcType=VARCHAR}
+      authority = #{authority,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      user_level = #{userLevel,jdbcType=TINYINT},
+      user_type = #{userType,jdbcType=TINYINT},
+      is_delete = #{isDelete,jdbcType=TINYINT},
+      email = #{email,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      wechat = #{wechat,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modified_time = #{modifiedTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <resultMap id="BaseResultMap" type="com.jason.autopush.auth.entity.User">
-    <result column="USER" jdbcType="CHAR" property="user" />
-    <result column="CURRENT_CONNECTIONS" jdbcType="BIGINT" property="currentConnections" />
-    <result column="TOTAL_CONNECTIONS" jdbcType="BIGINT" property="totalConnections" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="user_level" jdbcType="TINYINT" property="userLevel" />
+    <result column="user_type" jdbcType="TINYINT" property="userType" />
+    <result column="is_delete" jdbcType="TINYINT" property="isDelete" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="wechat" jdbcType="VARCHAR" property="wechat" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modified_time" jdbcType="TIMESTAMP" property="modifiedTime" />
   </resultMap>
+  <sql id="Base_Column_List">
+    id, username, password, avatar, user_level, user_type, is_delete, email, qq, tel, 
+    wechat, create_time, modified_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ums_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ums_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
   <insert id="insert" parameterType="com.jason.autopush.auth.entity.User">
-    insert into users (USER, CURRENT_CONNECTIONS, TOTAL_CONNECTIONS
-      )
-    values (#{user,jdbcType=CHAR}, #{currentConnections,jdbcType=BIGINT}, #{totalConnections,jdbcType=BIGINT}
-      )
+    insert into ums_user (id, username, password, 
+      avatar, user_level, user_type, 
+      is_delete, email, qq, 
+      tel, wechat, create_time, 
+      modified_time)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{avatar,jdbcType=VARCHAR}, #{userLevel,jdbcType=TINYINT}, #{userType,jdbcType=TINYINT}, 
+      #{isDelete,jdbcType=TINYINT}, #{email,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR}, #{wechat,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifiedTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.jason.autopush.auth.entity.User">
-    insert into users
+    insert into ums_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="user != null">
-        USER,
+      <if test="id != null">
+        id,
       </if>
-      <if test="currentConnections != null">
-        CURRENT_CONNECTIONS,
+      <if test="username != null">
+        username,
       </if>
-      <if test="totalConnections != null">
-        TOTAL_CONNECTIONS,
+      <if test="password != null">
+        password,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="userLevel != null">
+        user_level,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="wechat != null">
+        wechat,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifiedTime != null">
+        modified_time,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="user != null">
-        #{user,jdbcType=CHAR},
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
       </if>
-      <if test="currentConnections != null">
-        #{currentConnections,jdbcType=BIGINT},
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
-      <if test="totalConnections != null">
-        #{totalConnections,jdbcType=BIGINT},
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevel != null">
+        #{userLevel,jdbcType=TINYINT},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=TINYINT},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null">
+        #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedTime != null">
+        #{modifiedTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.jason.autopush.auth.entity.User">
+    update ums_user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevel != null">
+        user_level = #{userLevel,jdbcType=TINYINT},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=TINYINT},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=TINYINT},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="wechat != null">
+        wechat = #{wechat,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifiedTime != null">
+        modified_time = #{modifiedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.jason.autopush.auth.entity.User">
+    update ums_user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      user_level = #{userLevel,jdbcType=TINYINT},
+      user_type = #{userType,jdbcType=TINYINT},
+      is_delete = #{isDelete,jdbcType=TINYINT},
+      email = #{email,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      wechat = #{wechat,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modified_time = #{modifiedTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

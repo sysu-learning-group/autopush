@@ -1,12 +1,8 @@
-package com.jason.autopush.auth.dao.mapper;
+package com.jason.autopush.auth.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jason.autopush.auth.entity.Role;
 
 public interface RoleMapper {
-
-    Role selectByUserId(Integer id);
-
     int deleteByPrimaryKey(Integer id);
 
     int insert(Role record);

@@ -1,12 +1,8 @@
-package com.jason.autopush.auth.dao.mapper;
+package com.jason.autopush.auth.mapper;
 
 import com.jason.autopush.auth.entity.User;
 
 public interface UserMapper {
-    boolean isUsernameExist(String username);
-
-    User selectByUsername(String username);
-
     int deleteByPrimaryKey(Integer id);
 
     int insert(User record);

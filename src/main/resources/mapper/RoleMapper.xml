@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jason.autopush.auth.entity.RoleMapper">
+<mapper namespace="com.jason.autopush.auth.mapper.RoleMapper">
   <resultMap id="BaseResultMap" type="com.jason.autopush.auth.entity.Role">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="userId" jdbcType="INTEGER" property="userid" />
@@ -10,12 +10,6 @@
   <sql id="Base_Column_List">
     id, userId, username, role
   </sql>
-  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from roles
-    where userId = #{userId,jdbcType=INTEGER}
-  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -94,12 +88,6 @@
   <sql id="Base_Column_List">
     id, userId, username, role
   </sql>
-  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from roles
-    where userId = #{id,jdbcType=INTEGER}
-  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

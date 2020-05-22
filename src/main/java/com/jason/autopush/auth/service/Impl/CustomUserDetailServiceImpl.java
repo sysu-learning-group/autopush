@@ -1,8 +1,8 @@
 package com.jason.autopush.auth.service.Impl;
 
 import com.jason.autopush.auth.Exception.AuthErrorCode;
-import com.jason.autopush.auth.dao.mapper.RoleMapper;
-import com.jason.autopush.auth.dao.mapper.UserMapper;
+import com.jason.autopush.auth.mapper.RoleMapper;
+import com.jason.autopush.auth.mapper.UserMapper;
 import com.jason.autopush.auth.entity.Role;
 import com.jason.autopush.auth.entity.User;
 import com.jason.autopush.auth.service.CustomUserDetailService;
@@ -10,16 +10,12 @@ import com.jason.autopush.common.ClientRequestException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class CustomUserDetailServiceImpl implements CustomUserDetailService {

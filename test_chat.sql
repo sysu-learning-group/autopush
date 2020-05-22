@@ -240,6 +240,7 @@ CREATE TABLE `ums_user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(64) NOT NULL,
   `password` varchar(64) NOT NULL,
+  `authority` varchar(255) NOT NULL,
   `avatar` varchar(255) NOT NULL,
   `user_level` tinyint(3) unsigned NOT NULL DEFAULT '1' COMMENT '用户等级',
   `user_type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '用户类型',
@@ -257,12 +258,31 @@ CREATE TABLE `ums_user` (
 --
 -- Dumping data for table `ums_user`
 --
-
 LOCK TABLES `ums_user` WRITE;
 /*!40000 ALTER TABLE `ums_user` DISABLE KEYS */;
-INSERT INTO `ums_user` VALUES (1,'sky','$2a$10$I0ibbRbpkL2YMUwSODWNFevIQrSjfHAxLdVbRR8rSrv13w.ubVTBu','/test.png',1,1,0,NULL,NULL,NULL,NULL,'2019-11-17 18:32:02','2019-11-17 18:32:02'),(2,'yy','$2a$10$itsXji7ywRTvghAOjdaPtOZiFHiqvuGdZ9h3WZFvUCu8scZvQ0YKq','/test.png',1,1,0,NULL,NULL,NULL,NULL,'2019-11-18 15:18:19','2019-11-18 15:18:19'),(3,'anyetanxi','$2a$10$G8qQdxo1nPYVxtXdLDRxOeByetz.b/mFzOTRmAJE0NE7z02DX2mAi','/test.png',1,1,0,NULL,NULL,NULL,NULL,'2019-11-19 14:24:46','2019-11-19 14:24:46');
+INSERT INTO `ums_user` VALUES (1,'sky','$2a$10$I0ibbRbpkL2YMUwSODWNFevIQrSjfHAxLdVbRR8rSrv13w.ubVTBu','ADMIN,ROOT','/test.png',1,1,0,NULL,NULL,NULL,NULL,'2019-11-17 18:32:02','2019-11-17 18:32:02'),(2,'yy','$2a$10$itsXji7ywRTvghAOjdaPtOZiFHiqvuGdZ9h3WZFvUCu8scZvQ0YKq','','/test.png',1,1,0,NULL,NULL,NULL,NULL,'2019-11-18 15:18:19','2019-11-18 15:18:19'),(3,'anyetanxi','$2a$10$G8qQdxo1nPYVxtXdLDRxOeByetz.b/mFzOTRmAJE0NE7z02DX2mAi','','/test.png',1,1,0,NULL,NULL,NULL,NULL,'2019-11-19 14:24:46','2019-11-19 14:24:46');
 /*!40000 ALTER TABLE `ums_user` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+DROP TABLE IF EXISTS `roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `roles` (
+                         `id` INT(10) NOT NULL AUTO_INCREMENT,
+                         `userId` INT(10) unsigned NOT NULL COMMENT '用户id',
+                         `username` VARCHAR(64) DEFAULT NULL COMMENT '用户名',
+                         `role` VARCHAR(64) DEFAULT NULL COMMENT '角色',
+                         PRIMARY KEY (`id`),
+                         FOREIGN KEY (`userId`) REFERENCES `ums_user`(`id`)
+) ENGINE=INNODB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+LOCK TABLES `roles` WRITE;
+/*!40000 ALTER TABLE `ums_user` DISABLE KEYS */;
+INSERT INTO `roles` VALUES (1,1,'sky','ADMIN,ROOT');
+/*!40000 ALTER TABLE `ums_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

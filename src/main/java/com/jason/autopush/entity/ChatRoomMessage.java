@@ -1,5 +1,7 @@
 package com.jason.autopush.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.jason.autopush.bo.Session;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +13,9 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@TableName("chat_room_message")
 public class ChatRoomMessage implements Serializable {
+    @TableId
     private Integer id;
 
     private Integer roomId;
