@@ -1,32 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jason.autopush.auth.dao.mapper.ChatGroupMapper">
-  <resultMap id="BaseResultMap" type="com.jason.autopush.auth.entity.ChatGroup">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
-    <result column="icon" jdbcType="VARCHAR" property="icon" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="type" jdbcType="TINYINT" property="type" />
-    <result column="max_number_of_people" jdbcType="SMALLINT" property="maxNumberOfPeople" />
-    <result column="save_db" jdbcType="TINYINT" property="saveDb" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="modified_time" jdbcType="TIMESTAMP" property="modifiedTime" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jason.autopush.mapper.ChatGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.jason.autopush.entity.ChatGroup" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="group_name" property="groupName" jdbcType="VARCHAR" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="max_number_of_people" property="maxNumberOfPeople" jdbcType="SMALLINT" />
+    <result column="save_db" property="saveDb" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modified_time" property="modifiedTime" jdbcType="TIMESTAMP" />
   </resultMap>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     id, group_name, icon, description, type, max_number_of_people, save_db, create_time, 
     modified_time
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from chat_group
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from chat_group
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.jason.autopush.auth.entity.ChatGroup">
+  <insert id="insert" parameterType="com.jason.autopush.entity.ChatGroup" >
     insert into chat_group (id, group_name, icon, 
       description, type, max_number_of_people, 
       save_db, create_time, modified_time
@@ -36,236 +36,98 @@
       #{saveDb,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{modifiedTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.jason.autopush.auth.entity.ChatGroup">
+  <insert id="insertSelective" parameterType="com.jason.autopush.entity.ChatGroup" >
     insert into chat_group
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         id,
       </if>
-      <if test="groupName != null">
+      <if test="groupName != null" >
         group_name,
       </if>
-      <if test="icon != null">
+      <if test="icon != null" >
         icon,
       </if>
-      <if test="description != null">
+      <if test="description != null" >
         description,
       </if>
-      <if test="type != null">
+      <if test="type != null" >
         type,
       </if>
-      <if test="maxNumberOfPeople != null">
+      <if test="maxNumberOfPeople != null" >
         max_number_of_people,
       </if>
-      <if test="saveDb != null">
+      <if test="saveDb != null" >
         save_db,
       </if>
-      <if test="createTime != null">
+      <if test="createTime != null" >
         create_time,
       </if>
-      <if test="modifiedTime != null">
+      <if test="modifiedTime != null" >
         modified_time,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="groupName != null">
+      <if test="groupName != null" >
         #{groupName,jdbcType=VARCHAR},
       </if>
-      <if test="icon != null">
+      <if test="icon != null" >
         #{icon,jdbcType=VARCHAR},
       </if>
-      <if test="description != null">
+      <if test="description != null" >
         #{description,jdbcType=VARCHAR},
       </if>
-      <if test="type != null">
+      <if test="type != null" >
         #{type,jdbcType=TINYINT},
       </if>
-      <if test="maxNumberOfPeople != null">
+      <if test="maxNumberOfPeople != null" >
         #{maxNumberOfPeople,jdbcType=SMALLINT},
       </if>
-      <if test="saveDb != null">
+      <if test="saveDb != null" >
         #{saveDb,jdbcType=TINYINT},
       </if>
-      <if test="createTime != null">
+      <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="modifiedTime != null">
+      <if test="modifiedTime != null" >
         #{modifiedTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jason.autopush.auth.entity.ChatGroup">
+  <update id="updateByPrimaryKeySelective" parameterType="com.jason.autopush.entity.ChatGroup" >
     update chat_group
-    <set>
-      <if test="groupName != null">
+    <set >
+      <if test="groupName != null" >
         group_name = #{groupName,jdbcType=VARCHAR},
       </if>
-      <if test="icon != null">
+      <if test="icon != null" >
         icon = #{icon,jdbcType=VARCHAR},
       </if>
-      <if test="description != null">
+      <if test="description != null" >
         description = #{description,jdbcType=VARCHAR},
       </if>
-      <if test="type != null">
+      <if test="type != null" >
         type = #{type,jdbcType=TINYINT},
       </if>
-      <if test="maxNumberOfPeople != null">
+      <if test="maxNumberOfPeople != null" >
         max_number_of_people = #{maxNumberOfPeople,jdbcType=SMALLINT},
       </if>
-      <if test="saveDb != null">
+      <if test="saveDb != null" >
         save_db = #{saveDb,jdbcType=TINYINT},
       </if>
-      <if test="createTime != null">
+      <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="modifiedTime != null">
+      <if test="modifiedTime != null" >
         modified_time = #{modifiedTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jason.autopush.auth.entity.ChatGroup">
-    update chat_group
-    set group_name = #{groupName,jdbcType=VARCHAR},
-      icon = #{icon,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      type = #{type,jdbcType=TINYINT},
-      max_number_of_people = #{maxNumberOfPeople,jdbcType=SMALLINT},
-      save_db = #{saveDb,jdbcType=TINYINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      modified_time = #{modifiedTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="com.jason.autopush.auth.entity.ChatGroup">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="group_name" jdbcType="VARCHAR" property="groupName" />
-    <result column="icon" jdbcType="VARCHAR" property="icon" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="type" jdbcType="TINYINT" property="type" />
-    <result column="max_number_of_people" jdbcType="SMALLINT" property="maxNumberOfPeople" />
-    <result column="save_db" jdbcType="TINYINT" property="saveDb" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="modified_time" jdbcType="TIMESTAMP" property="modifiedTime" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, group_name, icon, description, type, max_number_of_people, save_db, create_time, 
-    modified_time
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from chat_group
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from chat_group
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.jason.autopush.auth.entity.ChatGroup">
-    insert into chat_group (id, group_name, icon, 
-      description, type, max_number_of_people, 
-      save_db, create_time, modified_time
-      )
-    values (#{id,jdbcType=INTEGER}, #{groupName,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
-      #{description,jdbcType=VARCHAR}, #{type,jdbcType=TINYINT}, #{maxNumberOfPeople,jdbcType=SMALLINT}, 
-      #{saveDb,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{modifiedTime,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.jason.autopush.auth.entity.ChatGroup">
-    insert into chat_group
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="groupName != null">
-        group_name,
-      </if>
-      <if test="icon != null">
-        icon,
-      </if>
-      <if test="description != null">
-        description,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="maxNumberOfPeople != null">
-        max_number_of_people,
-      </if>
-      <if test="saveDb != null">
-        save_db,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="modifiedTime != null">
-        modified_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="groupName != null">
-        #{groupName,jdbcType=VARCHAR},
-      </if>
-      <if test="icon != null">
-        #{icon,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null">
-        #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=TINYINT},
-      </if>
-      <if test="maxNumberOfPeople != null">
-        #{maxNumberOfPeople,jdbcType=SMALLINT},
-      </if>
-      <if test="saveDb != null">
-        #{saveDb,jdbcType=TINYINT},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modifiedTime != null">
-        #{modifiedTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jason.autopush.auth.entity.ChatGroup">
-    update chat_group
-    <set>
-      <if test="groupName != null">
-        group_name = #{groupName,jdbcType=VARCHAR},
-      </if>
-      <if test="icon != null">
-        icon = #{icon,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null">
-        description = #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        type = #{type,jdbcType=TINYINT},
-      </if>
-      <if test="maxNumberOfPeople != null">
-        max_number_of_people = #{maxNumberOfPeople,jdbcType=SMALLINT},
-      </if>
-      <if test="saveDb != null">
-        save_db = #{saveDb,jdbcType=TINYINT},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="modifiedTime != null">
-        modified_time = #{modifiedTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.jason.autopush.auth.entity.ChatGroup">
+  <update id="updateByPrimaryKey" parameterType="com.jason.autopush.entity.ChatGroup" >
     update chat_group
     set group_name = #{groupName,jdbcType=VARCHAR},
       icon = #{icon,jdbcType=VARCHAR},

@@ -1,6 +1,5 @@
 package com.jason.autopush.mapper;
 
-
 import com.jason.autopush.entity.ChatSingleMessage;
 
 public interface ChatSingleMessageMapper {

@@ -1,22 +1,8 @@
 package com.jason.autopush.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
 import java.util.Date;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@TableName("chat_single_message")
-public class ChatSingleMessage implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    @TableId
+public class ChatSingleMessage {
     private Integer id;
 
     private Integer fromUserId;
@@ -27,10 +13,43 @@ public class ChatSingleMessage implements Serializable {
 
     private Date createTime;
 
-    public ChatSingleMessage(Integer fromUserId, Integer toUserId, String content, Date createTime) {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getFromUserId() {
+        return fromUserId;
+    }
+
+    public void setFromUserId(Integer fromUserId) {
         this.fromUserId = fromUserId;
+    }
+
+    public Integer getToUserId() {
+        return toUserId;
+    }
+
+    public void setToUserId(Integer toUserId) {
         this.toUserId = toUserId;
-        this.content = content;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 }

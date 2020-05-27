@@ -1,19 +1,6 @@
 package com.jason.autopush.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@TableName("chat_room")
-public class ChatRoom implements Serializable {
-    @TableId
+public class ChatRoom {
     private Integer id;
 
     private String name;
@@ -22,64 +9,135 @@ public class ChatRoom implements Serializable {
 
     private String icon;
 
-    private Boolean isHot;
+    private Byte isHot;
 
-    /**
-     * 房间类型
-     */
     private Byte roomType;
 
     private Integer sort;
 
-    /**
-     * 是否记录聊天数据
-     */
-    private Boolean saveDb;
+    private Byte saveDb;
 
-    /**
-     * 是否禁言
-     */
-    private Boolean noSay;
+    private Byte noSay;
 
-    /**
-     * 管理员列表 使用逗号隔开
-     */
     private String admins;
 
-    /**
-     * 是否开启房间
-     */
-    private Boolean state;
+    private Byte state;
 
-    /**
-     * 用户加入类型 0 游客可进 1不可进
-     */
-    private Boolean joinType;
+    private Byte joinType;
 
-    /**
-     * 玩家等级限制
-     */
     private Byte userLevel;
 
-    /**
-     * 代理等级限制
-     */
     private Byte agentLevel;
 
-    private static final long serialVersionUID = 1L;
+    public Integer getId() {
+        return id;
+    }
 
-    public ChatRoom(String name, String explain, Byte roomType) {
-        this.name = name;
-        this.explain = explain;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
+    }
+
+    public String getExplain() {
+        return explain;
+    }
+
+    public void setExplain(String explain) {
+        this.explain = explain == null ? null : explain.trim();
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon == null ? null : icon.trim();
+    }
+
+    public Byte getIsHot() {
+        return isHot;
+    }
+
+    public void setIsHot(Byte isHot) {
+        this.isHot = isHot;
+    }
+
+    public Byte getRoomType() {
+        return roomType;
+    }
+
+    public void setRoomType(Byte roomType) {
         this.roomType = roomType;
-        this.joinType = true;
-        this.noSay = false;
-        this.icon = "/test.png";
-        this.isHot = false;
-        this.sort = 5;
-        this.saveDb = false;
-        this.state = true;
-        this.userLevel = 0;
-        this.agentLevel = 0;
+    }
+
+    public Integer getSort() {
+        return sort;
+    }
+
+    public void setSort(Integer sort) {
+        this.sort = sort;
+    }
+
+    public Byte getSaveDb() {
+        return saveDb;
+    }
+
+    public void setSaveDb(Byte saveDb) {
+        this.saveDb = saveDb;
+    }
+
+    public Byte getNoSay() {
+        return noSay;
+    }
+
+    public void setNoSay(Byte noSay) {
+        this.noSay = noSay;
+    }
+
+    public String getAdmins() {
+        return admins;
+    }
+
+    public void setAdmins(String admins) {
+        this.admins = admins == null ? null : admins.trim();
+    }
+
+    public Byte getState() {
+        return state;
+    }
+
+    public void setState(Byte state) {
+        this.state = state;
+    }
+
+    public Byte getJoinType() {
+        return joinType;
+    }
+
+    public void setJoinType(Byte joinType) {
+        this.joinType = joinType;
+    }
+
+    public Byte getUserLevel() {
+        return userLevel;
+    }
+
+    public void setUserLevel(Byte userLevel) {
+        this.userLevel = userLevel;
+    }
+
+    public Byte getAgentLevel() {
+        return agentLevel;
+    }
+
+    public void setAgentLevel(Byte agentLevel) {
+        this.agentLevel = agentLevel;
     }
 }

@@ -1,37 +1,37 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.jason.autopush.mapper.ChatRoomMapper">
-  <resultMap id="BaseResultMap" type="com.jason.autopush.auth.entity.ChatRoom">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="explain" jdbcType="VARCHAR" property="explain" />
-    <result column="icon" jdbcType="VARCHAR" property="icon" />
-    <result column="is_hot" jdbcType="TINYINT" property="isHot" />
-    <result column="room_type" jdbcType="TINYINT" property="roomType" />
-    <result column="sort" jdbcType="INTEGER" property="sort" />
-    <result column="save_db" jdbcType="TINYINT" property="saveDb" />
-    <result column="no_say" jdbcType="TINYINT" property="noSay" />
-    <result column="admins" jdbcType="VARCHAR" property="admins" />
-    <result column="state" jdbcType="TINYINT" property="state" />
-    <result column="join_type" jdbcType="TINYINT" property="joinType" />
-    <result column="user_level" jdbcType="TINYINT" property="userLevel" />
-    <result column="agent_level" jdbcType="TINYINT" property="agentLevel" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jason.autopush.mapper.ChatRoomMapper" >
+  <resultMap id="BaseResultMap" type="com.jason.autopush.entity.ChatRoom" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="explain" property="explain" jdbcType="VARCHAR" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="is_hot" property="isHot" jdbcType="TINYINT" />
+    <result column="room_type" property="roomType" jdbcType="TINYINT" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="save_db" property="saveDb" jdbcType="TINYINT" />
+    <result column="no_say" property="noSay" jdbcType="TINYINT" />
+    <result column="admins" property="admins" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="TINYINT" />
+    <result column="join_type" property="joinType" jdbcType="TINYINT" />
+    <result column="user_level" property="userLevel" jdbcType="TINYINT" />
+    <result column="agent_level" property="agentLevel" jdbcType="TINYINT" />
   </resultMap>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     id, name, explain, icon, is_hot, room_type, sort, save_db, no_say, admins, state, 
     join_type, user_level, agent_level
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
     from chat_room
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from chat_room
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.jason.autopush.auth.entity.ChatRoom">
+  <insert id="insert" parameterType="com.jason.autopush.entity.ChatRoom" >
     insert into chat_room (id, name, explain, 
       icon, is_hot, room_type, 
       sort, save_db, no_say, 
@@ -43,338 +43,143 @@
       #{admins,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT}, #{joinType,jdbcType=TINYINT}, 
       #{userLevel,jdbcType=TINYINT}, #{agentLevel,jdbcType=TINYINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.jason.autopush.auth.entity.ChatRoom">
+  <insert id="insertSelective" parameterType="com.jason.autopush.entity.ChatRoom" >
     insert into chat_room
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         id,
       </if>
-      <if test="name != null">
+      <if test="name != null" >
         name,
       </if>
-      <if test="explain != null">
+      <if test="explain != null" >
         explain,
       </if>
-      <if test="icon != null">
+      <if test="icon != null" >
         icon,
       </if>
-      <if test="isHot != null">
+      <if test="isHot != null" >
         is_hot,
       </if>
-      <if test="roomType != null">
+      <if test="roomType != null" >
         room_type,
       </if>
-      <if test="sort != null">
+      <if test="sort != null" >
         sort,
       </if>
-      <if test="saveDb != null">
+      <if test="saveDb != null" >
         save_db,
       </if>
-      <if test="noSay != null">
+      <if test="noSay != null" >
         no_say,
       </if>
-      <if test="admins != null">
+      <if test="admins != null" >
         admins,
       </if>
-      <if test="state != null">
+      <if test="state != null" >
         state,
       </if>
-      <if test="joinType != null">
+      <if test="joinType != null" >
         join_type,
       </if>
-      <if test="userLevel != null">
+      <if test="userLevel != null" >
         user_level,
       </if>
-      <if test="agentLevel != null">
+      <if test="agentLevel != null" >
         agent_level,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="name != null">
+      <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="explain != null">
+      <if test="explain != null" >
         #{explain,jdbcType=VARCHAR},
       </if>
-      <if test="icon != null">
+      <if test="icon != null" >
         #{icon,jdbcType=VARCHAR},
       </if>
-      <if test="isHot != null">
+      <if test="isHot != null" >
         #{isHot,jdbcType=TINYINT},
       </if>
-      <if test="roomType != null">
+      <if test="roomType != null" >
         #{roomType,jdbcType=TINYINT},
       </if>
-      <if test="sort != null">
+      <if test="sort != null" >
         #{sort,jdbcType=INTEGER},
       </if>
-      <if test="saveDb != null">
+      <if test="saveDb != null" >
         #{saveDb,jdbcType=TINYINT},
       </if>
-      <if test="noSay != null">
+      <if test="noSay != null" >
         #{noSay,jdbcType=TINYINT},
       </if>
-      <if test="admins != null">
+      <if test="admins != null" >
         #{admins,jdbcType=VARCHAR},
       </if>
-      <if test="state != null">
+      <if test="state != null" >
         #{state,jdbcType=TINYINT},
       </if>
-      <if test="joinType != null">
+      <if test="joinType != null" >
         #{joinType,jdbcType=TINYINT},
       </if>
-      <if test="userLevel != null">
+      <if test="userLevel != null" >
         #{userLevel,jdbcType=TINYINT},
       </if>
-      <if test="agentLevel != null">
+      <if test="agentLevel != null" >
         #{agentLevel,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jason.autopush.auth.entity.ChatRoom">
+  <update id="updateByPrimaryKeySelective" parameterType="com.jason.autopush.entity.ChatRoom" >
     update chat_room
-    <set>
-      <if test="name != null">
+    <set >
+      <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="explain != null">
+      <if test="explain != null" >
         explain = #{explain,jdbcType=VARCHAR},
       </if>
-      <if test="icon != null">
+      <if test="icon != null" >
         icon = #{icon,jdbcType=VARCHAR},
       </if>
-      <if test="isHot != null">
+      <if test="isHot != null" >
         is_hot = #{isHot,jdbcType=TINYINT},
       </if>
-      <if test="roomType != null">
+      <if test="roomType != null" >
         room_type = #{roomType,jdbcType=TINYINT},
       </if>
-      <if test="sort != null">
+      <if test="sort != null" >
         sort = #{sort,jdbcType=INTEGER},
       </if>
-      <if test="saveDb != null">
+      <if test="saveDb != null" >
         save_db = #{saveDb,jdbcType=TINYINT},
       </if>
-      <if test="noSay != null">
+      <if test="noSay != null" >
         no_say = #{noSay,jdbcType=TINYINT},
       </if>
-      <if test="admins != null">
+      <if test="admins != null" >
         admins = #{admins,jdbcType=VARCHAR},
       </if>
-      <if test="state != null">
+      <if test="state != null" >
         state = #{state,jdbcType=TINYINT},
       </if>
-      <if test="joinType != null">
+      <if test="joinType != null" >
         join_type = #{joinType,jdbcType=TINYINT},
       </if>
-      <if test="userLevel != null">
+      <if test="userLevel != null" >
         user_level = #{userLevel,jdbcType=TINYINT},
       </if>
-      <if test="agentLevel != null">
+      <if test="agentLevel != null" >
         agent_level = #{agentLevel,jdbcType=TINYINT},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.jason.autopush.auth.entity.ChatRoom">
-    update chat_room
-    set name = #{name,jdbcType=VARCHAR},
-      explain = #{explain,jdbcType=VARCHAR},
-      icon = #{icon,jdbcType=VARCHAR},
-      is_hot = #{isHot,jdbcType=TINYINT},
-      room_type = #{roomType,jdbcType=TINYINT},
-      sort = #{sort,jdbcType=INTEGER},
-      save_db = #{saveDb,jdbcType=TINYINT},
-      no_say = #{noSay,jdbcType=TINYINT},
-      admins = #{admins,jdbcType=VARCHAR},
-      state = #{state,jdbcType=TINYINT},
-      join_type = #{joinType,jdbcType=TINYINT},
-      user_level = #{userLevel,jdbcType=TINYINT},
-      agent_level = #{agentLevel,jdbcType=TINYINT}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <resultMap id="BaseResultMap" type="com.jason.autopush.auth.entity.ChatRoom">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="explain" jdbcType="VARCHAR" property="explain" />
-    <result column="icon" jdbcType="VARCHAR" property="icon" />
-    <result column="is_hot" jdbcType="TINYINT" property="isHot" />
-    <result column="room_type" jdbcType="TINYINT" property="roomType" />
-    <result column="sort" jdbcType="INTEGER" property="sort" />
-    <result column="save_db" jdbcType="TINYINT" property="saveDb" />
-    <result column="no_say" jdbcType="TINYINT" property="noSay" />
-    <result column="admins" jdbcType="VARCHAR" property="admins" />
-    <result column="state" jdbcType="TINYINT" property="state" />
-    <result column="join_type" jdbcType="TINYINT" property="joinType" />
-    <result column="user_level" jdbcType="TINYINT" property="userLevel" />
-    <result column="agent_level" jdbcType="TINYINT" property="agentLevel" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, name, explain, icon, is_hot, room_type, sort, save_db, no_say, admins, state, 
-    join_type, user_level, agent_level
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from chat_room
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from chat_room
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.jason.autopush.auth.entity.ChatRoom">
-    insert into chat_room (id, name, explain, 
-      icon, is_hot, room_type, 
-      sort, save_db, no_say, 
-      admins, state, join_type, 
-      user_level, agent_level)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{explain,jdbcType=VARCHAR}, 
-      #{icon,jdbcType=VARCHAR}, #{isHot,jdbcType=TINYINT}, #{roomType,jdbcType=TINYINT}, 
-      #{sort,jdbcType=INTEGER}, #{saveDb,jdbcType=TINYINT}, #{noSay,jdbcType=TINYINT}, 
-      #{admins,jdbcType=VARCHAR}, #{state,jdbcType=TINYINT}, #{joinType,jdbcType=TINYINT}, 
-      #{userLevel,jdbcType=TINYINT}, #{agentLevel,jdbcType=TINYINT})
-  </insert>
-  <insert id="insertSelective" parameterType="com.jason.autopush.auth.entity.ChatRoom">
-    insert into chat_room
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="explain != null">
-        explain,
-      </if>
-      <if test="icon != null">
-        icon,
-      </if>
-      <if test="isHot != null">
-        is_hot,
-      </if>
-      <if test="roomType != null">
-        room_type,
-      </if>
-      <if test="sort != null">
-        sort,
-      </if>
-      <if test="saveDb != null">
-        save_db,
-      </if>
-      <if test="noSay != null">
-        no_say,
-      </if>
-      <if test="admins != null">
-        admins,
-      </if>
-      <if test="state != null">
-        state,
-      </if>
-      <if test="joinType != null">
-        join_type,
-      </if>
-      <if test="userLevel != null">
-        user_level,
-      </if>
-      <if test="agentLevel != null">
-        agent_level,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="explain != null">
-        #{explain,jdbcType=VARCHAR},
-      </if>
-      <if test="icon != null">
-        #{icon,jdbcType=VARCHAR},
-      </if>
-      <if test="isHot != null">
-        #{isHot,jdbcType=TINYINT},
-      </if>
-      <if test="roomType != null">
-        #{roomType,jdbcType=TINYINT},
-      </if>
-      <if test="sort != null">
-        #{sort,jdbcType=INTEGER},
-      </if>
-      <if test="saveDb != null">
-        #{saveDb,jdbcType=TINYINT},
-      </if>
-      <if test="noSay != null">
-        #{noSay,jdbcType=TINYINT},
-      </if>
-      <if test="admins != null">
-        #{admins,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null">
-        #{state,jdbcType=TINYINT},
-      </if>
-      <if test="joinType != null">
-        #{joinType,jdbcType=TINYINT},
-      </if>
-      <if test="userLevel != null">
-        #{userLevel,jdbcType=TINYINT},
-      </if>
-      <if test="agentLevel != null">
-        #{agentLevel,jdbcType=TINYINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.jason.autopush.auth.entity.ChatRoom">
-    update chat_room
-    <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="explain != null">
-        explain = #{explain,jdbcType=VARCHAR},
-      </if>
-      <if test="icon != null">
-        icon = #{icon,jdbcType=VARCHAR},
-      </if>
-      <if test="isHot != null">
-        is_hot = #{isHot,jdbcType=TINYINT},
-      </if>
-      <if test="roomType != null">
-        room_type = #{roomType,jdbcType=TINYINT},
-      </if>
-      <if test="sort != null">
-        sort = #{sort,jdbcType=INTEGER},
-      </if>
-      <if test="saveDb != null">
-        save_db = #{saveDb,jdbcType=TINYINT},
-      </if>
-      <if test="noSay != null">
-        no_say = #{noSay,jdbcType=TINYINT},
-      </if>
-      <if test="admins != null">
-        admins = #{admins,jdbcType=VARCHAR},
-      </if>
-      <if test="state != null">
-        state = #{state,jdbcType=TINYINT},
-      </if>
-      <if test="joinType != null">
-        join_type = #{joinType,jdbcType=TINYINT},
-      </if>
-      <if test="userLevel != null">
-        user_level = #{userLevel,jdbcType=TINYINT},
-      </if>
-      <if test="agentLevel != null">
-        agent_level = #{agentLevel,jdbcType=TINYINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.jason.autopush.auth.entity.ChatRoom">
+  <update id="updateByPrimaryKey" parameterType="com.jason.autopush.entity.ChatRoom" >
     update chat_room
     set name = #{name,jdbcType=VARCHAR},
       explain = #{explain,jdbcType=VARCHAR},

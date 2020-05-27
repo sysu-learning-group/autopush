@@ -1,22 +1,8 @@
 package com.jason.autopush.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
 import java.util.Date;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@TableName("chat_group")
-public class ChatGroup implements Serializable {
-    private static final long serialVersionUID = 1L;
-
-    @TableId
+public class ChatGroup {
     private Integer id;
 
     private String groupName;
@@ -24,22 +10,86 @@ public class ChatGroup implements Serializable {
     private String icon;
 
     private String description;
-    /**
-     * 群类型
-     */
+
     private Byte type;
 
-    /**
-     * 加群人数最大值
-     */
     private Short maxNumberOfPeople;
 
-    /**
-     * 是否保存数据到数据库
-     */
-    private Boolean saveDb;
+    private Byte saveDb;
 
     private Date createTime;
 
     private Date modifiedTime;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName == null ? null : groupName.trim();
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon == null ? null : icon.trim();
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description == null ? null : description.trim();
+    }
+
+    public Byte getType() {
+        return type;
+    }
+
+    public void setType(Byte type) {
+        this.type = type;
+    }
+
+    public Short getMaxNumberOfPeople() {
+        return maxNumberOfPeople;
+    }
+
+    public void setMaxNumberOfPeople(Short maxNumberOfPeople) {
+        this.maxNumberOfPeople = maxNumberOfPeople;
+    }
+
+    public Byte getSaveDb() {
+        return saveDb;
+    }
+
+    public void setSaveDb(Byte saveDb) {
+        this.saveDb = saveDb;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getModifiedTime() {
+        return modifiedTime;
+    }
+
+    public void setModifiedTime(Date modifiedTime) {
+        this.modifiedTime = modifiedTime;
+    }
 }

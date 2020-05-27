@@ -1,21 +1,8 @@
 package com.jason.autopush.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.jason.autopush.bo.Session;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
 import java.util.Date;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@TableName("chat_room_message")
-public class ChatRoomMessage implements Serializable {
-    @TableId
+public class ChatRoomMessage {
     private Integer id;
 
     private Integer roomId;
@@ -26,12 +13,43 @@ public class ChatRoomMessage implements Serializable {
 
     private Date createTime;
 
-    private static final long serialVersionUID = 1L;
+    public Integer getId() {
+        return id;
+    }
 
-    public ChatRoomMessage(Integer roomId, String content, Session session, Date time) {
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(Integer roomId) {
         this.roomId = roomId;
-        this.content = content;
-        this.fromUserId = session.getUserId();
-        this.createTime = time;
+    }
+
+    public Integer getFromUserId() {
+        return fromUserId;
+    }
+
+    public void setFromUserId(Integer fromUserId) {
+        this.fromUserId = fromUserId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

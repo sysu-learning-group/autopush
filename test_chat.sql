@@ -264,6 +264,9 @@ INSERT INTO `ums_user` VALUES (1,'sky','$2a$10$I0ibbRbpkL2YMUwSODWNFevIQrSjfHAxL
 /*!40000 ALTER TABLE `ums_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
+--
+-- Table structure for table `roles`
+--
 
 DROP TABLE IF EXISTS `roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -276,6 +279,10 @@ CREATE TABLE `roles` (
                          PRIMARY KEY (`id`),
                          FOREIGN KEY (`userId`) REFERENCES `ums_user`(`id`)
 ) ENGINE=INNODB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `roles`
+--
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `ums_user` DISABLE KEYS */;
