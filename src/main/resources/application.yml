@@ -1,4 +1,4 @@
-jason:
+websocket:
   server:
     port: 8081
     host: localhost
